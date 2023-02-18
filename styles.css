@@ -1,3 +1,7 @@
+:root {
+    --calculator-color: black;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -7,13 +11,16 @@ body {
 }
 
 .calculator-case {
-    border: 40px solid rgb(230, 158, 229);
+    border: 40px solid var(--calculator-color);
     width: 400px;
     border-radius: 20px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    grid-gap: 10px;
+    background-color: var(--calculator-color);
+    box-shadow: 5px 10px 18px #888888;
 }
 
 .display {
@@ -22,20 +29,31 @@ body {
     text-align: right;
     grid-column: 1 / span 4;
     font-size: 40px;
-    background-color: black;
+    background-color: rgb(56, 52, 52);
     color: white;
+    border-radius: 10px;
 }
 
 button {
     font-size: 30px;
+    border-radius: 10px;
 }
 
 #AC {
     grid-column: 1 / span 2;
+    background-color: rgb(196, 86, 86);
+}
+
+#C {
+    background-color: rgb(92, 183, 183);;
 }
 
 #plus {
     grid-row: 5 / span 2;
     grid-column: 4 / 5;
+}
+
+.operator {
+    background-color: rgb(172, 165, 172);
 }
 
