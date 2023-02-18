@@ -6,15 +6,14 @@ const numButtons = document.querySelectorAll('.num');
 const operatorButtons = document.querySelectorAll('.operator');
 const display = document.querySelector('.display');
 
-let displayValue;
+let displayValue = "";
 
 allClearButton.addEventListener('click', allClear);
 clearButton.addEventListener('click', clear);
 decimalButton.addEventListener('click', addDecimal);
 equalsButton.addEventListener('click', displayResult);
-nodesEventListeners(numButtons);
-nodesEventListeners(operatorButtons);
-
+numButtonsEventListeners(numButtons);
+operatorsEventListeners(operatorButtons);
 
 function operate(operator, num1, num2) {
     if (operator == "plus") {
@@ -45,11 +44,13 @@ function divide(num1, num2) {
 }
 
 function allClear() {
-    console.log('allClear');
+    display.value = "";
+    displayValue = "";
 }
 
 function clear() {
-    console.log('clear');
+    displayValue = displayValue.substring(0, displayValue.length - 1);
+    display.value = displayValue;
 }
 
 function addDecimal() {
@@ -60,13 +61,22 @@ function displayResult() {
     console.log('result');
 }
 
-function displayNum() {
-    console.log('num');
+function displayNum(e) {
+    if (displayValue.length < 11) {
+        displayValue += e.target.textContent;
+        display.value = displayValue;
+    }
 }
 
-function nodesEventListeners(nodes) {
+function numButtonsEventListeners(nodes) {
     for (let i = 0; i < nodes.length; i++) {
         nodes[i].addEventListener('click', displayNum);
+    }
+}
+
+function operatorsEventListeners(nodes) {
+    for (let i = 0; i < nodes.length; i++) {
+        nodes[i].addEventListener('click', displayResult);
     }
 }
 
