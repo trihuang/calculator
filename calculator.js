@@ -11,6 +11,7 @@ let operandOne = null;
 let operatorOne = null;
 let operatorTwo = null;
 let computation = null;
+let isValidOperatorInput = false;
 
 allClearButton.addEventListener('click', allClear);
 clearButton.addEventListener('click', clear);
@@ -56,22 +57,20 @@ function allClear() {
     operatorOne = null;
     operatorTwo = null;
     computation = null;
-    //isValidOperatorInput = false;
+    isValidOperatorInput = false;
 }
 
 function clear() {
-    /*
-    if ((operatorOne != null) && operatorTwo == null && !isValidOperatorInput) {
+    if ((operatorOne !== null) && operatorTwo === null && !isValidOperatorInput) {
         operatorOne = null;
         isValidOperatorInput = true;
-    } else if (operatorTwo != null && !isValidOperatorInput) {
+    } else if (operatorTwo !== null && !isValidOperatorInput) {
         operatorTwo = null;
         isValidOperatorInput = true;
     } else {
-        displayValue = displayValue.toString().substring(0, displayValue.length - 1);
+        displayValue = display.value.substring(0, displayValue.length - 1);
         display.value = displayValue;
     } 
-    */
 }
 
 function addDecimal(e) {
@@ -103,6 +102,7 @@ function equals() {
             operandOne = displayValue;
             operatorOne = null;
             operatorTwo = null;
+            isValidOperatorInput = true;
         }
     } else {
         computation = operate(operatorOne, Number(operandOne), Number(displayValue));
@@ -115,6 +115,7 @@ function equals() {
             operandOne = displayValue;
             operatorOne = null;
             operatorTwo = null;
+            isValidOperatorInput = true;
         }
     }
 }
@@ -130,7 +131,7 @@ function displayNum(e) {
         displayValue += input;
         display.value = displayValue;
     } 
-        //isValidOperatorInput = true;
+    isValidOperatorInput = true;
 }
 
 function handleOperator(e) {
@@ -144,6 +145,7 @@ function handleOperator(e) {
         display.value = displayValue;
         operandOne = displayValue;
         displayValue = "";
+        isValidOperatorInput = false;
     } else if (operatorOne !== null && operatorTwo !== null) {
         computation = operate(operatorTwo, Number(operandOne), Number(displayValue));
         operatorTwo = nextOperator;
@@ -151,10 +153,12 @@ function handleOperator(e) {
         display.value = displayValue;
         operandOne = displayValue;
         displayValue = "";
+        isValidOperatorInput = false;
     } else {
         operatorOne = nextOperator;
         operandOne = displayValue;
         displayValue = "";
+        isValidOperatorInput = false;
     }
 }
 
