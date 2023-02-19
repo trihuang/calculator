@@ -76,6 +76,7 @@ function clear() {
 
 function addDecimal(e) {
     if (displayValue === 'ERROR') return;
+    if (display.value.length > 10) return;
     let decimal = e.target.textContent;
     if (displayValue === "") {
         displayValue = '0';
@@ -89,6 +90,7 @@ function addDecimal(e) {
 
 function equals() {
     if (displayValue === 'ERROR') return;
+    if (display.value.length > 10) return;
     if (operatorOne === null) return;
     else if (operatorTwo !== null) {
         computation = operate(operatorTwo, Number(operandOne), Number(displayValue));
@@ -119,18 +121,21 @@ function equals() {
 
 function displayNum(e) {
     if (displayValue === 'ERROR') return;
+    if (display.value.length > 10) return;
     let input = e.target.textContent;
     if (displayValue === '0' && input !== 0) {
         displayValue = input;
         display.value = displayValue;
     } else if (displayValue.length < 10) {
         displayValue += input;
-        display.value = displayValue;}
+        display.value = displayValue;
+    } 
         //isValidOperatorInput = true;
 }
 
 function handleOperator(e) {
     if (displayValue === 'ERROR') return;
+    if (display.value.length > 10) return;
     let nextOperator = e.target.id;
     if (operatorOne !== null && operatorTwo === null) {
         operatorTwo = nextOperator;
