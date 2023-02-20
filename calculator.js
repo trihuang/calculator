@@ -20,6 +20,8 @@ equalsButton.addEventListener('click', equals);
 numButtonsEventListeners(numButtons);
 operatorsEventListeners(operatorButtons);
 
+window.addEventListener('keydown', handleKeyPress);
+
 function operate(operator, num1, num2) {
     if (operator == "plus") {
         return add(num1, num2);
@@ -174,3 +176,8 @@ function operatorsEventListeners(nodes) {
     }
 }
 
+function handleKeyPress(e) {
+    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
+    if (!key) return;
+    key.click();
+}
