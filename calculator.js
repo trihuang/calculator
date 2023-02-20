@@ -91,7 +91,6 @@ function addDecimal(e) {
 
 function equals() {
     if (displayValue === 'ERROR') return;
-    if (display.value.length > 10) return;
     if (operatorOne === null) return;
     else if (operatorTwo !== null) {
         computation = operate(operatorTwo, Number(operandOne), Number(displayValue));
@@ -100,6 +99,7 @@ function equals() {
             display.value = displayValue;
         } else {
             displayValue = computation;
+            if (displayValue.toString().length > 10) return;
             display.value = displayValue;
             operandOne = displayValue;
             operatorOne = null;
@@ -113,6 +113,7 @@ function equals() {
             display.value = displayValue;
         } else {
             displayValue = computation;
+            if (displayValue.toString().length > 10) return;
             display.value = displayValue;
             operandOne = displayValue;
             operatorOne = null;
@@ -177,7 +178,12 @@ function operatorsEventListeners(nodes) {
 }
 
 function handleKeyPress(e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        equalsButton.click();
+    }
     const key = document.querySelector(`button[data-key='${e.keyCode}']`);
-    if (!key) return;
-    key.click();
+    const keyNumpad = document.querySelector(`button[data-numpad='${e.keyCode}']`);
+    if (key) key.click();
+    else if (keyNumpad) keyNumpad.click();
 }
